@@ -25,18 +25,16 @@ class ChatAgent:
         Display messages in the chat interface.
         If no messages are present, adds a default AI message.
         """
-        if "chat_history" not in st.session_state:
+        if not st.session_state.chat_history:
             st.session_state.chat_history = []
-            st.session_state.chat_history.append(AIMessage(content="How can I help you?"))
-            st.chat_message("ai").write("How can I help you?")
-
+            st.session_state.chat_history.append(AIMessage(content="I am a chabot with knowledge base on Waste Management. How can I help you?"))
 
         for message in st.session_state.chat_history:
             if isinstance(message, HumanMessage):
                 with st.chat_message("Human"):
                     st.markdown(message.content)
             else:
-                with st.chat_message("AI"):
+                with st.chat_message("ai"):
                     st.markdown(message.content)
 
 
